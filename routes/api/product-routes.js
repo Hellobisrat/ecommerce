@@ -24,7 +24,10 @@ router.get('/:id',  async(req, res) => {
 
   try {
     const prodData = await Product.findOne({
-      include:[{model:Category},{model:Tag}]
+      include:[{model:Category},{model:Tag}],
+      where:{
+        id:req.params.id
+      }
     })
     if (!prodData) {
       res.status(404).json({ message: 'No Category found with that id!' });
